@@ -1,0 +1,14 @@
+services:
+  google_ap2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: google_ap2
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000" # shopping agent
+      - "8001:8001" # merchant agent
+      - "8002:8002" # payment agent
+      - "8003:8003" # other agent
+      - "8004:8004" # other agent
