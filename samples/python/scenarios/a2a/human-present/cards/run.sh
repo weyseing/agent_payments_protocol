@@ -1,29 +1,25 @@
 #!/bin/bash
-
-# A script to automate the execution of the card_payment example.
-# It starts all necessary servers and agents in the background,
-# and then runs the client.
-
-# Exit immediately if any command exits with a non-zero status.
 set -e
 
-# The directory containing the agents.
+# paths
 AGENTS_DIR="samples/python/src/roles"
-# A directory to store logs.
 LOG_DIR=".logs"
 
+# checking agent path
 if [ ! -d "$AGENTS_DIR" ]; then
   echo "Error: Directory '$AGENTS_DIR' not found."
   echo "Please run this script from the root of the repository."
   exit 1
 fi
 
+# env
 if [ -f .env ]; then
   set -a
   source .env
   set +a
 fi
 
+# check google api key
 USE_VERTEXAI=$(printf "%s" "${GOOGLE_GENAI_USE_VERTEXAI}" | tr '[:upper:]' '[:lower:]')
 if [ -z "${GOOGLE_API_KEY}" ] && [ "${USE_VERTEXAI}" != "true" ]; then
   echo "Please set your GOOGLE_API_KEY environment variable before running."
@@ -31,13 +27,11 @@ if [ -z "${GOOGLE_API_KEY}" ] && [ "${USE_VERTEXAI}" != "true" ]; then
   exit 1
 fi
 
-# Set up and activate a virtual environment.
+# activate venv
 echo "Setting up the Python virtual environment..."
-
 if [ ! -d ".venv" ]; then
   uv venv
 fi
-
 source .venv/bin/activate
 echo "Virtual environment activated."
 
