@@ -4,3 +4,9 @@
 ```properties
 GOOGLE_API_KEY=
 ```
+
+# Human-Present Card Scenario
+- **Run sh script below**
+```bash
+bash samples/python/scenarios/a2a/human-present/cards/run.sh
+```
