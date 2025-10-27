@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: google_ap2
+    env_file:
+      - .env
     volumes:
       - .:/app
     ports:
