@@ -14,8 +14,8 @@ bash samples/python/scenarios/a2a/human-present/cards/run.sh
 
 # AP2 Package Install
 ### `Dev` Environment: -
-- AP2 Source code in `src/ap2/`
-- In `samples/python/pyproject.toml`, it refer to `(/pyproject.toml)`
+- AP2 Source code in **local** `src/ap2/`
+- In `samples/python/pyproject.toml`, it refer to **uv workspace**
 ```properties
 dependencies = [
     ...
@@ -26,17 +26,23 @@ dependencies = [
 [tool.uv.sources]
 ap2 = { workspace = true }
 ```
-- In `(/pyproject.toml)`, it refer to `src/ap2/`
+- In **root workspace** `(/pyproject.toml)`, it refer to **local source code** `src/ap2/`
 ```properties
-# point to local src/ap2/
+# root workspace = ap2
+[project]
+name = "ap2"
+
+# point to local (src/ap2/)
 [tool.setuptools.packages.find]
 where = ["src"]
 ```
 - **To install**
 ```bash
-cd samples/python
 uv sync
+# you will see the version follow LOCAL (/pyproject.toml)
 uv pip list | grep ap2
+# check ap2 path & local code change
+uv run python -c "import ap2.types.mandate as m, ap2; print(ap2.__file__, m.__file__, m.CART_MANDATE_DATA_KEY)"
 ```
 
 ### `Prod` Environment: -
@@ -62,5 +68,8 @@ dependencies = [
 ```bash
 cd samples/python
 uv sync
+# you will see the version follow LOCAL (/pyproject.toml)
 uv pip list | grep ap2
+# check ap2 path & local code change
+uv run python -c "import ap2.types.mandate as m, ap2; print(ap2.__file__, m.__file__, m.CART_MANDATE_DATA_KEY)"
 ```
