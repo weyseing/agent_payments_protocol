@@ -15,7 +15,8 @@ dependencies = [
     "google-genai",
     "httpx",
     "requests",
-    "ap2"
+    "ap2",
+    # "ap2 @ git+https://github.com/google-agentic-commerce/AP2.git@main"
 ]
 keywords = ["payments", "a2a", "ap2"]
 readme = "README.md"

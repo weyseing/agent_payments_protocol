@@ -18,8 +18,5 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
 # copy files
 COPY . /app
 
-# install AP2 python library (not yet published to PyPI)
-RUN uv pip install --system git+https://github.com/google-agentic-commerce/AP2.git@main
-
 # entrypoint
 CMD ["tail", "-f", "/dev/null"]

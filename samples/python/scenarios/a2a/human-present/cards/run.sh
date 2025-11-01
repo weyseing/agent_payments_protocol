@@ -35,14 +35,14 @@ fi
 source .venv/bin/activate
 echo "Virtual environment activated."
 
-# uv install
+# uv install (root package)
 echo "Installing project in editable mode..."
 uv pip install -e .
 
 # create logs directory
 mkdir -p "$LOG_DIR"
 
-# cleanup when script ends
+# kill process when ends
 cleanup() {
   echo ""
   echo "Shutting down background processes..."
@@ -54,7 +54,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# uv sync
+# uv sync (ap2-samples package)
 echo "Syncing virtual environment with uv sync..."
 if uv sync --package ap2-samples; then
   echo "Virtual environment synced successfully."
@@ -73,7 +73,7 @@ pids=()
 echo ""
 echo "Starting remote servers and agents as background processes..."
 
-# disable uv sync
+# uv run
 UV_RUN_CMD="uv run --no-sync"
 if [ -f ".env" ]; then
   UV_RUN_CMD="$UV_RUN_CMD --env-file .env"
