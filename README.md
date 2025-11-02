@@ -38,7 +38,8 @@ where = ["src"]
 ```
 - **To install**
 ```bash
-uv sync
+# install
+uv sync --package ap2-samples
 # you will see the version follow LOCAL (/pyproject.toml)
 uv pip list | grep ap2
 # check ap2 path & local code change
@@ -66,6 +67,7 @@ dependencies = [
 ```
 - **To install**
 ```bash
+# install
 cd samples/python
 uv sync
 # you will see the version follow LOCAL (/pyproject.toml)
