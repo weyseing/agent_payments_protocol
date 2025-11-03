@@ -4,14 +4,6 @@
 ```properties
 GOOGLE_API_KEY=
 ```
-
-# Human-Present Card
-- **Run sh script below**
-```shell
-bash samples/python/scenarios/a2a/human-present/cards/run.sh
-```
-- **Access to http://localhost:8000/**
-
 # AP2 Package Install
 ### `Dev` Environment: -
 - AP2 Source code in **local** `src/ap2/`
@@ -74,4 +66,32 @@ uv sync
 uv pip list | grep ap2
 # check ap2 path & local code change
 uv run python -c "import ap2.types.mandate as m, ap2; print(ap2.__file__, m.__file__, m.CART_MANDATE_DATA_KEY)"
+```
+
+
+# Human-Present Card
+- **Run sh script below**
+```shell
+bash samples/python/scenarios/a2a/human-present/cards/run.sh
+```
+- **Access to http://localhost:8000/**
+
+
+# Shopping Agent
+### Entrypoint: -
+- **ADK dev web UI**
+```bash
+uv run --no-sync --env-file .env --package ap2-samples adk web --host 0.0.0.0 "samples/python/src/roles" --reload_agents
+```
+
+- **Agent Module `(samples/python/src/roles/shopping_agent)`**
+
+- **`__init__.py` file**
+```python
+from . import agent
+```
+
+- **`root_agent` variable in `agent.py`**
+```python
+root_agent = RetryingLlmAgent()
 ```
