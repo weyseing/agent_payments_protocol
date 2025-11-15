@@ -1,9 +1,9 @@
 services:
-  google_ap2:
+  agent_payments_protocol:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: google_ap2
+    container_name: agent_payments_protocol
     env_file:
       - .env
     volumes:
